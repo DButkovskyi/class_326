@@ -3,8 +3,11 @@ from argparse import ArgumentParser
 import sys
 
 
+MIN_PERCENT = 0.02
+YEAR_DAYS = 365
+CYCLE_DAYS = 30
+
 def get_min_payment(balance, fees = 0):
-    
     """
     Calculates the minimum monthly payment for a credit card balance.
     Args:
@@ -14,7 +17,6 @@ def get_min_payment(balance, fees = 0):
         float: The minimum monthly payment, which is either 2% of the balance plus fees or $25, whichever is greater.
     """
 
-    MIN_PERCENT = 0.02
     min_payment = ((balance * MIN_PERCENT) + fees)
     if (min_payment > 25):
         return min_payment
@@ -23,7 +25,6 @@ def get_min_payment(balance, fees = 0):
 
 
 def interest_charged(balance, apr):
-
     """
     Calculates the monthly interest charged on a credit card balance.
     Args:
@@ -33,9 +34,8 @@ def interest_charged(balance, apr):
         float: The monthly interest charged on the balance.
     """
 
-    YEAR_DAYS = 365
-    CYCLE_DAYS = 30
-    #converts int APR into float
+
+    #converts int APR into percent
     apr = apr/100
     interest = (apr/YEAR_DAYS) * balance * CYCLE_DAYS
 
@@ -43,7 +43,6 @@ def interest_charged(balance, apr):
 
 
 def remaining_payments(balance, apr, targetamount = None, credit_line = 5000, fees = 0):
-
     """
     Calculate the number of payments needed to pay off a credit card balance and track thresholds.
     Args:
@@ -95,7 +94,6 @@ def remaining_payments(balance, apr, targetamount = None, credit_line = 5000, fe
 
 
 def main(balance, apr, credit_line = 5000, targetamount = None, fees = 0):
-
     """
     Calculate credit card payment information.
     Args:
