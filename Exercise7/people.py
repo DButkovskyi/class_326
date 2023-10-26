@@ -1,7 +1,7 @@
 """A template for a python script deliverable for INST326.
 
 Driver: Danyil Butkovskyi
-Navigator: None
+Navigator: James Miller
 Assignment: Exercise: People
 Date: 10_19_23
 
@@ -11,7 +11,13 @@ Challenges Encountered: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import re
 
 def parse_name(text):
-    # Use a regular expression to capture the first and last name
+    """ parses name
+    
+        Attributes:
+        text: string line of input to parse name from
+        return tuple of first and last name
+    """
+    # Use a regular expression to capture the first and last name; first word is first name, second is last
     name_pattern = r'(\w+)\s+(\w+)'
     match = re.search(name_pattern, text)
     
@@ -23,7 +29,13 @@ def parse_name(text):
         return None   
 
 def parse_address(text):
-    # Use regular expressions to capture street, city, and state
+    """ parses address
+    
+        Attributes:
+        text: string line of input to parse address from
+        return instace of object of class Address
+    """
+    # Use regular expressions to capture street, city, and state. 3 groups, group 3 is 2 uppercase letters, word before them is City the rest brtween numbers and city is street
     address_pattern = r'(\d+\s[^\d]+)\s(\w+)\s([A-Z]{2})'
     match = re.search(address_pattern, text)
 
@@ -37,7 +49,13 @@ def parse_address(text):
 
 
 def parse_email(text):
-    # Use a regular expression to capture the email address
+    """ parses email
+    
+        Attributes:
+        text: string line of input to parse email from
+        return string email
+    """
+    # Use a regular expression to capture the email address, one group with specific pattern
     email_pattern = r'([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,5})'
     match = re.search(email_pattern, text)
     
@@ -48,6 +66,11 @@ def parse_email(text):
         return None
 
 class Address:
+    """ class Address
+    
+        Attributes:
+        self, street, city and state, creates object using __init__ and __repr__ to print
+    """
     def __init__(self, street, city, state):
         self.street = street
         self.city = city
@@ -57,6 +80,11 @@ class Address:
 
 
 class Employee:
+    """ class Employee
+    
+        Attributes:
+        self, line, parses line and creates object using __init__ and __repr__ to print
+    """
     def __init__(self, line):
         # Extract name, address, and email from the line
         first_name, last_name = parse_name(line)
